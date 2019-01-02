@@ -9,7 +9,8 @@ $extensionsAutorisees = array('jpeg', 'jpg', 'gif', 'png', 'doc', 'pdf', 'bmp', 
 if (isset($_FILES['monfichier'])) {
     if (!(in_array($extensionFichier, $extensionsAutorisees))) {
         echo "Le fichier n'a pas l'extension attendue.</br>";
-        echo "L'extension ".$elementsChemin['extension']." n'est pas autorisé!"; ?><form>
+        echo "L'extension ".$elementsChemin['extension']." n'est pas autorisé!"; 
+        ?><form>
         <input type="button" value="Retour" onclick="history.go(-1)">
         </form><?php
     } else {
@@ -20,8 +21,9 @@ if (isset($_FILES['monfichier'])) {
 
         if (move_uploaded_file($_FILES['monfichier']['tmp_name'],
         $repertoireDestination.$nomDestination)) {
-            echo 'Nous avons sauvegardé votre fichier de '.$_FILES['monfichier']['size'].' octets sous le nom '.$_FILES['monfichier']['tmp_name'];
-            echo '</br></br> merci '.$_POST['email'].' nous avons envoyé un mail à '.$_POST['mailToSend']; ?>
+            echo 'Nous avons sauvegardé votre fichier de '.$_FILES['monfichier']['size'].' octets sous le nom '.$nomDestination;
+            echo '</br></br> merci '.$_POST['email'].' nous avons envoyé un mail à '.$_POST['mailToSend'];
+            ?>
             <form></br>
             <input type="button" value="Retour" onclick="history.go(-1)">
             </form>
@@ -31,35 +33,36 @@ if (isset($_FILES['monfichier'])) {
         } else {
             echo "Le fichier n'a pas été uploadé (trop gros ?) ou ".
             'Le déplacement du fichier temporaire a échoué'.
-            " vérifiez l'existence du répertoire ".$repertoireDestination.'</br>'; ?><form>
+            " vérifiez l'existence du répertoire ".$repertoireDestination.'</br>'; 
+            ?><form>
             <input type="button" value="Retour" onclick="history.go(-1)">
             </form><?php
         }
     }
 }
 
-$mail = $_POST['mailToSend'];
-$passage_ligne = "\r\n";
-$boundary = '-----='.md5(rand());
-$sujet = 'Un fichier vous attends!';
+// $mail = $_POST['mailToSend'];
+// $passage_ligne = "\r\n";
+// $boundary = '-----='.md5(rand());
+// $sujet = 'Un fichier vous attends!';
 
-//=====Création du header de l'e-mail
-$header = 'From: '.$_POST['email'].$passage_ligne;
-$header .= 'MIME-Version: 1.0'.$passage_ligne;
-$header .= 'Content-Type: multipart/alternative;'.$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
-//==========
+// //=====Création du header de l'e-mail
+// $header = 'From: '.$_POST['email'].$passage_ligne;
+// $header .= 'MIME-Version: 1.0'.$passage_ligne;
+// $header .= 'Content-Type: multipart/alternative;'.$passage_ligne." boundary=\"$boundary\"".$passage_ligne;
+// //==========
 
-$message_txt = 'Vous recevez cet email de la part de '.$_POST['email'].'qui vient de vous envoyer un un fichier. Pour le récupérer suivez ce lien';
+// $message_txt = 'Vous recevez cet email de la part de '.$_POST['email'].'qui vient de vous envoyer un un fichier. Pour le récupérer suivez ce lien';
 
-$message .= 'Content-Type: text/html; charset="ISO-8859-1"'.$passage_ligne;
-$message .= 'Content-Transfer-Encoding: 8bit'.$passage_ligne;
-$message .= 'Content-Disposition: attachment; filename="'.$_FILES['monfichier']['tmp_name'].'"'.$passage_ligne;
+// $message .= 'Content-Type: text/html; charset="ISO-8859-1"'.$passage_ligne;
+// $message .= 'Content-Transfer-Encoding: 8bit'.$passage_ligne;
+// $message .= 'Content-Disposition: attachment; filename="'.$nomDestination.'"'.$passage_ligne;
 
-//==== ouvre le fichier en lecture seule.
-$fichier = fopen($_FILES['monfichier']['tmp_name'], 'r');
-//====lit l'ensemble du fichier avec la fonction fread.
-$attachement = fread($fichier, filesize($_FILES['monfichier']['tmp_name']));
-fclose($fichier); //on ferme le fichier.
+// //==== ouvre le fichier en lecture seule.
+// $fichier = fopen("$nomDestination", 'r');
+// //====lit l'ensemble du fichier avec la fonction fread.
+// $attachement = fread($fichier, filesize($nomDestination));
+// fclose($fichier); //on ferme le fichier.
 
-//====Envoi du mail
-mail($mail, $sujet, $message, $header);
+// //====Envoi du mail
+// mail($mail, $sujet, $message, $header);
