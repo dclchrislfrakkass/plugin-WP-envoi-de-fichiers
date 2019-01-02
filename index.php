@@ -36,8 +36,6 @@ $(document).ready(function() {
             $('.error').text('Le champs est vide.');
         } else if(!emailReg.test(emailaddressVal)) {
             $('.error').text('Ce n\'est pas une adresse email');
-        } else if(!emailblockReg.test(emailaddressVal)) {
-            $('.error').text('N\'utilisez pas votre adresse hotmail ! GRRR');
         } else {
             $('.error').text('');
         }
