@@ -10,12 +10,12 @@ if (!(in_array($extensionFichier, $extensionsAutorisees))) {
 } else {
     // Copie dans le repertoire du script avec un nom en incluant l'heure
 
-    $repertoireDestination = dirname(__FILE__).'/';
+    $repertoireDestination = dirname(__FILE__).'/upload/';
     $nomDestination = 'fichier_du_'.date('YmdHis').'.'.$extensionFichier;
 
     if (move_uploaded_file($_FILES['monfichier']['tmp_name'],
     $repertoireDestination.$nomDestination)) {
-        echo' Nous avons sauvegardé votre fichier sous le nom '.$_FILES['monfichier']['tmp_name'].' et nous avons envoyer le lien vers (email)';
+        echo' Nous avons sauvegardé votre fichier de '.$_FILES['monfichier']['size'].' octets sous le nom '.$_FILES['monfichier']['tmp_name'].' et nous avons envoyer le lien à (email)';
     // echo 'Le fichier temporaire '.$_FILES['monfichier']['tmp_name'].
         // ' a été déplacé vers '.$repertoireDestination.$nomDestination;
     } else {
