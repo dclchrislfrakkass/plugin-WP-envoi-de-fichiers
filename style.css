@@ -7,6 +7,6 @@ form {
     text-align: center;
     
 }
-.error {
+.error, p {
     color: red;
 }
