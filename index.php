@@ -9,7 +9,7 @@ Author URI: https://DCL.com
 
 //add menu
 function customplugin_menu() {
-    add_menu_page("Custom Plugin", "Custom Plugin","manage_options", "myplugin", "uploadfile");
+    add_menu_page("Envoi de fichiers", "Envoi de fichiers","manage_options", "plugin-WP-envoi-de-fichiers/index.php");
 }
 
 add_action("admin_menu", "customplugin_menu");
